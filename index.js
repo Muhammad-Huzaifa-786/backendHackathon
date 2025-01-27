@@ -22,8 +22,8 @@ const app = express();
 //   app.options('*', cors()); // Handle preflight requests
 
 app.use(cors({
-    origin: "https://frontend-hackathon-microfinanaceapp.vercel.app", // Allow this specific origin
-    credentials: true, // Allow cookies or Authorization headers
+    origin: "*", // Allow this specific origin
+    // credentials: true, // Allow cookies or Authorization headers
 }));
 
 app.use(express.json());
@@ -39,4 +39,4 @@ app.use('/adminsign', AdminSign);
 app.use('/usersign', UserSign);
 
 const PORT = PORTS || 5000;
-app.listen(PORT,'0.0.0.0', () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
