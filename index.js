@@ -16,16 +16,16 @@ const app = express();
 //     methods: 'GET,POST,PUT,DELETE,OPTIONS', // Allow these methods
 //     allowedHeaders: 'Content-Type,Authorization', // Allow these headers
 //   };
-  
+
 //   app.use(cors(corsOptions));
-  
+
 //   app.options('*', cors()); // Handle preflight requests
-
 app.use(cors({
-    origin: "*", // Allow this specific origin
-    // credentials: true, // Allow cookies or Authorization headers
+    origin: "https://frontend-hackathon-microfinanaceapp.vercel.app", // Allow this specific origin
+    methods: "GET,POST,PUT,DELETE,OPTIONS", // Allow these methods
+    allowedHeaders: "Content-Type,Authorization", // Allow these headers
+    credentials: true, // Allow credentials (cookies, etc.)
 }));
-
 app.use(express.json());
 mongoose.connect(`${MONGO_URI}`, {
     serverSelectionTimeoutMS: 30000,  // Time to wait for MongoDB to select a server (5 seconds)
@@ -33,6 +33,10 @@ mongoose.connect(`${MONGO_URI}`, {
     .then(() => console.log('MongoDB connected'))
     .catch(err => console.log(err, "Error connecting to MongoDB"));
 
+app.get('/', (req, res) => {
+    // Your login logic here
+    res.send('successful');
+});
 app.use('/api/auth', authRoutes);
 app.use('/admin', adminRoutes);
 app.use('/adminsign', AdminSign);
