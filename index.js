@@ -11,19 +11,19 @@ dotenv.config();
 
 const app = express();
 
-app.use(cors({ origin: '*' }));
+app.use(cors());
 
-// Handle preflight requests
-app.options('*', cors());
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-    if (req.method === 'OPTIONS') {
-        return res.status(200).end();
-    }
-    next();
-});
+// // Handle preflight requests
+// app.options('*', cors());
+// app.use((req, res, next) => {
+//     res.header('Access-Control-Allow-Origin', '*');
+//     res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+//     res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+//     if (req.method === 'OPTIONS') {
+//         return res.status(200).end();
+//     }
+//     next();
+// });
 
 app.use(express.json());
 mongoose.connect(`${MONGO_URI}`, {
