@@ -1,0 +1,6 @@
+export const PORTS='5000'
+export const MONGO_URI='mongodb+srv://hackathon:hackathon@cluster0.wx2rh.mongodb.net/'
+export const SMTP_USER='huzaifa2008khi@gmail.com'
+export const SMTP_PASS='cutibkfktnnrzeen'
+export const FRONTEND_URL='https://frontend-hackathon-microfinanaceapp.vercel.app'
+export const JWT_SECRET='huzaifahoon'

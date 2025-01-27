@@ -2,15 +2,16 @@ import User from '../models/User.js';
 import nodemailer from 'nodemailer';
 import dotenv from 'dotenv';
 import jwt from 'jsonwebtoken';
+import { FRONTEND_URL, JWT_SECRET, SMTP_PASS, SMTP_USER } from '../envfile.js';
 
 dotenv.config();
 
-const urlfront = process.env.FRONTEND_URL;
+const urlfront = FRONTEND_URL;
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS,
+        user: SMTP_USER,
+        pass: SMTP_PASS,
     },
 });
 
@@ -163,7 +164,7 @@ export const AddUser = async (req, res) => {
         await user.save();
         const resetLink = `${urlfront}/user/${user._id}`;
         const mailOptions = {
-            from: process.env.SMTP_USER,
+            from: SMTP_USER,
             to: user.email,
             subject: 'Welcome! Your Account Has Been Created',
             html: `
@@ -229,7 +230,7 @@ export const updateGuarantor = async (req, res) => {
         // Generate a token
         const token = jwt.sign(
             { id: updatedUser._id },
-            process.env.JWT_SECRET,
+            JWT_SECRET,
             { expiresIn: '1h' }
         );
 

@@ -6,10 +6,10 @@ import authRoutes from './routes/auth.js'; // Add `.js` extension for ES Modules
 import adminRoutes from './routes/adminRoutes.js'; // Add `.js` extension for ES Modules
 import AdminSign from './routes/adminSign.js'; // Add `.js` extension for ES Modules
 import UserSign from './routes/userSign.js'; // Add `.js` extension for ES Modules
+import { MONGO_URI, PORTS } from './envfile.js';
 dotenv.config();
 
 const app = express();
-const MONGO_URI='mongodb+srv://hackathon:hackathon@cluster0.wx2rh.mongodb.net/'
 app.use(cors());
 app.use(express.json());
 mongoose.connect(`${MONGO_URI}`, {
@@ -23,5 +23,5 @@ app.use('/admin', adminRoutes);
 app.use('/adminsign', AdminSign);
 app.use('/usersign', UserSign);
 
-const PORT = process.env.PORT || 5000;
+const PORT = PORTS || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

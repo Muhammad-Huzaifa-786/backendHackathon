@@ -1,6 +1,7 @@
 import nodemailer from 'nodemailer'; // Import nodemailer
 import dotenv from 'dotenv';
 import User from '../models/User.js'; // Adjust the path to your User model
+import { SMTP_PASS, SMTP_USER } from '../envfile.js';
 dotenv.config(); // Load environment variables
 
 export const GetAllUser = async (req, res) => {
@@ -35,14 +36,14 @@ export const AdminAccept = async (req, res) => {
         const transporter = nodemailer.createTransport({
             service: 'gmail', // You can use other services like 'outlook', etc.
             auth: {
-                user: process.env.SMTP_USER,
-                pass: process.env.SMTP_PASS,
+                user: SMTP_USER,
+                pass: SMTP_PASS,
             },
         });
 
         // Set up the email content
         const mailOptions = {
-            from: process.env.SMTP_USER, // Replace with your email
+            from: SMTP_USER, // Replace with your email
             to: userEmail, // Send to the updated user's email
             subject: 'Admin Acceptance Notification',
             text: 'Your request has been accepted by the admin.',

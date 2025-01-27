@@ -3,14 +3,15 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import nodemailer from 'nodemailer';
 import dotenv from 'dotenv';
+import { SMTP_PASS, SMTP_USER } from '../envfile.js';
 
 dotenv.config();
 
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS,
+        user: SMTP_USER,
+        pass: SMTP_PASS,
     },
 });
 
@@ -38,7 +39,7 @@ export const register = async (req, res) => {
         });
 
         const mailOptions = {
-            from: process.env.SMTP_USER,
+            from:SMTP_USER,
             to: email,
             subject: 'Token',
             html: `
