@@ -11,19 +11,15 @@ dotenv.config();
 
 const app = express();
 
-app.use(cors());
-
-// // Handle preflight requests
-// app.options('*', cors());
-// app.use((req, res, next) => {
-//     res.header('Access-Control-Allow-Origin', '*');
-//     res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-//     res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-//     if (req.method === 'OPTIONS') {
-//         return res.status(200).end();
-//     }
-//     next();
-// });
+const corsOptions = {
+    origin: 'https://frontend-hackathon-microfinanaceapp.vercel.app', // Allow this origin
+    methods: 'GET,POST,PUT,DELETE,OPTIONS', // Allow these methods
+    allowedHeaders: 'Content-Type,Authorization', // Allow these headers
+  };
+  
+  app.use(cors(corsOptions));
+  
+  app.options('*', cors()); // Handle preflight requests
 
 app.use(express.json());
 mongoose.connect(`${MONGO_URI}`, {
