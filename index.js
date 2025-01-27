@@ -11,9 +11,10 @@ dotenv.config();
 
 const app = express();
 
-app.use(cors({
-    origin: '*',
-}));
+app.use(cors({ origin: '*' }));
+
+// Handle preflight requests
+app.options('*', cors());
 
 app.use(express.json());
 mongoose.connect(`${MONGO_URI}`, {
