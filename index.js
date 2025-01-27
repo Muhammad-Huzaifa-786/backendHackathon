@@ -10,7 +10,13 @@ import { MONGO_URI, PORTS } from './envfile.js';
 dotenv.config();
 
 const app = express();
-app.use(cors());
+const corsOptions = {
+    origin: 'https://frontend-hackathon-microfinanaceapp.vercel.app/', // Replace with your frontend URL
+    methods: ['GET', 'POST', 'PATCH'], // Allowed HTTP methods
+};
+
+// Use CORS with options
+app.use(cors(corsOptions));
 app.use(express.json());
 mongoose.connect(`${MONGO_URI}`, {
     serverSelectionTimeoutMS: 30000,  // Time to wait for MongoDB to select a server (5 seconds)
