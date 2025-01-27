@@ -10,9 +10,10 @@ import { MONGO_URI, PORTS } from './envfile.js';
 dotenv.config();
 
 const app = express();
-app.use(cors());
-// Handle preflight requests
-app.options('*', cors());
+
+app.use(cors({
+    origin: '*',
+}));
 
 app.use(express.json());
 mongoose.connect(`${MONGO_URI}`, {
