@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import jwt from 'jsonwebtoken';
 
 dotenv.config();
+
 const urlfront = process.env.FRONTEND_URL;
 const transporter = nodemailer.createTransport({
     service: 'gmail',

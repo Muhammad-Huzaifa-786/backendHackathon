@@ -9,13 +9,14 @@ import UserSign from './routes/userSign.js'; // Add `.js` extension for ES Modul
 dotenv.config();
 
 const app = express();
-
+const MONGO_URI='mongodb+srv://hackathon:hackathon@cluster0.wx2rh.mongodb.net/'
 app.use(cors());
 app.use(express.json());
-
-mongoose.connect(`${process.env.MONGO_URI}`)
+mongoose.connect(`${MONGO_URI}`, {
+    serverSelectionTimeoutMS: 30000,  // Time to wait for MongoDB to select a server (5 seconds)
+})
     .then(() => console.log('MongoDB connected'))
-    .catch(err => console.log(err, "error hai"));
+    .catch(err => console.log(err, "Error connecting to MongoDB"));
 
 app.use('/api/auth', authRoutes);
 app.use('/admin', adminRoutes);
