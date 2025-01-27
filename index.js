@@ -11,15 +11,20 @@ dotenv.config();
 
 const app = express();
 
-const corsOptions = {
-    origin: 'https://frontend-hackathon-microfinanaceapp.vercel.app', // Allow this origin
-    methods: 'GET,POST,PUT,DELETE,OPTIONS', // Allow these methods
-    allowedHeaders: 'Content-Type,Authorization', // Allow these headers
-  };
+// const corsOptions = {
+//     origin: 'https://frontend-hackathon-microfinanaceapp.vercel.app', // Allow this origin
+//     methods: 'GET,POST,PUT,DELETE,OPTIONS', // Allow these methods
+//     allowedHeaders: 'Content-Type,Authorization', // Allow these headers
+//   };
   
-  app.use(cors(corsOptions));
+//   app.use(cors(corsOptions));
   
-  app.options('*', cors()); // Handle preflight requests
+//   app.options('*', cors()); // Handle preflight requests
+
+app.use(cors({
+    origin: "https://frontend-hackathon-microfinanaceapp.vercel.app", // Allow this specific origin
+    credentials: true, // Allow cookies or Authorization headers
+}));
 
 app.use(express.json());
 mongoose.connect(`${MONGO_URI}`, {
