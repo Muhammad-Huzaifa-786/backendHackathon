@@ -1,5 +1,4 @@
 import User from '../models/UserSign.js';
-import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import nodemailer from 'nodemailer';
 import dotenv from 'dotenv';
@@ -100,9 +99,9 @@ export const login = async (req, res) => {
         }
 
         // Generate a JWT token
-        const token = jwt.sign({ id: user._id }, JWT_SECRET, { expiresIn: '1h' });
+     
 
-        res.status(200).json({ token });
+        res.status(200).json({ message: 'Login successful' });
     } catch (error) {
         console.error('Error during login:', error);
         res.status(500).json({ error: 'Error logging in' });
