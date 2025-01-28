@@ -21,10 +21,11 @@ const app = express();
 
 //   app.options('*', cors()); // Handle preflight requests
 app.use(cors({
-    origin: "https://frontend-hackathon-microfinanaceapp.vercel.app", // Allow this specific origin
-    methods: "GET,POST,PUT,DELETE,OPTIONS", // Allow these methods
-    allowedHeaders: "Content-Type,Authorization", // Allow these headers
-    credentials: true, // Allow credentials (cookies, etc.)
+    origin: "*", // Allow this specific origin
+    // origin: "https://frontend-hackathon-microfinanaceapp.vercel.app", // Allow this specific origin
+    // methods: "GET,POST,PUT,DELETE,OPTIONS", // Allow these methods
+    // allowedHeaders: "Content-Type,Authorization", // Allow these headers
+    // credentials: true, // Allow credentials (cookies, etc.)
 }));
 app.use(express.json());
 mongoose.connect(`${MONGO_URI}`, {
@@ -37,10 +38,10 @@ app.get('/', (req, res) => {
     // Your login logic here
     res.send('successful');
 });
-app.use('/api/auth', authRoutes);
-app.use('/admin', adminRoutes);
-app.use('/adminsign', AdminSign);
-app.use('/usersign', UserSign);
+app.use('/api/api/auth', authRoutes);
+app.use('/api/admin', adminRoutes);
+app.use('/api/adminsign', AdminSign);
+app.use('/api/usersign', UserSign);
 
 const PORT = PORTS || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
