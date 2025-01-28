@@ -35,7 +35,6 @@ mongoose.connect(`${MONGO_URI}`, {
     .catch(err => console.log(err, "Error connecting to MongoDB"));
 
 app.get('/', (req, res) => {
-    // Your login logic here
     res.send('successful');
 });
 app.use('/api/api/auth', authRoutes);
